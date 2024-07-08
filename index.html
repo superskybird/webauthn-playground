@@ -267,6 +267,7 @@
       },
       "challenge": "AAABeB78HrIemh1jTdJICr_3QG_RMOhp",
       "pubKeyCredParams": [
+        { type: "public-key", alg: -65537 },
         { type: "public-key", alg: -257 },
         { type: "public-key", alg: -35 },
         { type: "public-key", alg: -36 },
@@ -309,7 +310,7 @@
       .add("authenticatorAttachment", JsConfig.listType("platform", "cross-platform", ""), "", "Authenticator type", "0")
       .add("residentKey", JsConfig.listType("required", "preferred", "discouraged", ""), "preferred", "FIDO credential filter", "0")
       .add("userVerification", JsConfig.listType("required", "preferred", "discouraged"), "preferred", "FIDO credential filter", "0 1")
-      .add("attestation", JsConfig.listType("none", "direct", "indirect"), "none", "Requested FIDO attestation type", "0")
+      .add("attestation", JsConfig.listType("none", "direct", "indirect"), "direct", "Requested FIDO attestation type", "0")
       .add("sign", JsConfig.boolType(), false, "IdCloud Transaction Signature extension", "1")
       .add("hints", JsConfig.listType("", "security-key", "client-device", "hybrid"), "", "Requested FIDO attestation type", "0 1")
       .add("extensions", JsConfig.boolType(), false, "Add extension", "0 1");
@@ -731,7 +732,8 @@
           "-257": "RS256",
           "-8": "EdDSA",
           "-35": "ES384",
-          "-36": "ES512"
+          "-36": "ES512",
+          "-65537": "Hybrid"
         };
         let keyAlgoName = KEY_ALGO_NAMES[keyAlgo];
         addRow("Key algo", `${keyAlgo} ${keyAlgoName ? " (" + keyAlgoName + ")" : ""}`);
